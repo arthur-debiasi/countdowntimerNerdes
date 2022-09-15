@@ -42,8 +42,6 @@ export default class App extends Component {
       const { minutes, seconds, timerId } = this.state;
       // console.log(minutes, seconds);
       if (minutes === 0 && seconds === '0-1') {
-        const audio = new Audio(ringer);
-        audio.play();
         this.setState({ isCountdownTimerOn: false })
         clearInterval(timerId)
       };
@@ -58,9 +56,14 @@ export default class App extends Component {
       minutes: 1,
       timerId: 0, 
     })
+    window.location.reload(); 
     console.log('Desmontado');
   }
 
+  componentDidMount(){
+    const audio = new Audio(ringer);
+    audio.play();
+  }
   render() {
     const { isCountdownTimerOn, seconds, minutes } = this.state;
     return (
