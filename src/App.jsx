@@ -8,6 +8,7 @@ import "./App.css"
 export default class App extends Component {
   state = {
     isCountdownTimerOn: false,
+    tribo: 1,
     seconds: 59,
     minutes: 1  ,
     timerId: 0,
@@ -65,10 +66,20 @@ export default class App extends Component {
     audio.play();
   }
   render() {
-    const { isCountdownTimerOn, seconds, minutes } = this.state;
+    const { isCountdownTimerOn, seconds, minutes, tribo } = this.state;
     return (
       <div className='container'>
-        <h1>Intervalo da Turma 24 <br />Tribo Nerdes</h1>
+        <label htmlFor="tribo-a">
+          Tribo Atanes
+          {' '}
+          <input type="radio" name="tribo" id="tribo-a" value={'0'} onChange={this.handleChange} />
+          </label>
+          <label htmlFor="tribo-b">
+          Tribo Nerdes
+          {' '}
+          <input type="radio" name="tribo" id="tribo-b" value={'1'} onChange={this.handleChange} />
+          </label>
+          {tribo ? <h1>Intervalo da Turma 24 <br />Tribo Nerdes</h1> : <h1>Intervalo da Turma 24 <br />Tribo Atanes</h1>}
         { isCountdownTimerOn ? (
         <CountdownTimer
           countdownTimerMount= { this.countdownTimerMount }
@@ -79,6 +90,7 @@ export default class App extends Component {
         />
         ) : (
         <CountdownSettings
+          tribo={ tribo }
           minutes= { minutes }
           seconds={ seconds }
           handleChange={ this.handleChange }
