@@ -5,7 +5,7 @@ body {
   background-color: lightgrey;
   /* border: solid 3px blue; */
   width: 80%;
-  height: 80%;
+  height: 70%;
   /* font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
 }
 
@@ -48,5 +48,5 @@ body {
   margin-top: 5%;
   font-family: 'Orbitron', sans-serif;
   border-radius: 5%;
-  font-size: 4vh;
+  font-size: 5vh;
  }

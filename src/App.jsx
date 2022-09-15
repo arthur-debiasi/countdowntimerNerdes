@@ -103,7 +103,7 @@ export default class App extends Component {
         >
           { isCountdownTimerOn ? 'Recomeçar' : 'Começar' }
         </button>
-        
+        <h6>Desenvolvido por Arthur Debiasi - T24B</h6>
         
       </div>
     )
