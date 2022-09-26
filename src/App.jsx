@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import CountdownSettings from './components/CountdownSettings'
 import CountdownTimer from './components/CountdownTimer'
-import ringer from './data/boraBill.mp3'
-import music from './data/CTT-musics.mp3'
+import ringer from './data/rooster.wav'
+// import music from './data/CTT-musics.mp3'
 import "./App.css"
 
 export default class App extends Component {
@@ -21,18 +21,24 @@ export default class App extends Component {
   handleClick = () => {
     this.setState(({ isCountdownTimerOn, minutes }) => ({ 
       isCountdownTimerOn: !isCountdownTimerOn,
-      minutes: minutes -1 }))
+      minutes: minutes -1 }), () => {
+        const { isCountdownTimerOn } =  this.state;
+        if (!isCountdownTimerOn) { 
+          this.audio2.play();
+          console.log('play');
+        } else {
+          this.audio2.setAttribute('src', ringer);
+          this.audio2.load();
+          console.log('pause');
+        }
+      })
   }
-
+  
   countdownTimerMount = () => {
-    const audio = new Audio(music);
-    audio.play();
-    console.log('Did mount');
     const INTERVAL = 1000;
-    const timerId = setInterval(() => {
+    this.timerId = setInterval(() => {
       this.setState(({seconds}) => ({ seconds: seconds <= 10 ? `0${seconds - 1}` : seconds - 1 }));
     }, INTERVAL);
-    this.setState({ timerId });
   }
 
   countdownTimerUpdate = () => {
@@ -40,30 +46,31 @@ export default class App extends Component {
         seconds: 59,
         minutes: minutes - 1,
       }));
-      const { minutes, seconds, timerId } = this.state;
+      const { minutes, seconds } = this.state;
       // console.log(minutes, seconds);
       if (minutes === 0 && seconds === '0-1') {
         this.setState({ isCountdownTimerOn: false })
-        clearInterval(timerId)
+        clearInterval(this.timerId)
       };
     // }
   }
 
   countdownTimerUnmount = () => {
-    const { timerId } = this.state;
-    clearInterval(timerId);
+    // const { timerId } = this.state;
+    clearInterval(this.timerId);
     this.setState({
       seconds: 59,
       minutes: 1,
       timerId: 0, 
     })
-    window.location.reload(); 
-    console.log('Desmontado');
+    // window.location.reload(); 
+    // console.log('Desmontado');
   }
 
   componentDidMount(){
-    const audio = new Audio(ringer);
-    audio.play();
+    this.audio2 = new Audio(ringer);
+    // const audio = new Audio(ringer);
+    // // audio.play();
   }
   render() {
     const { isCountdownTimerOn, seconds, minutes, tribo } = this.state;
