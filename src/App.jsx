@@ -63,6 +63,7 @@ export default class App extends Component {
       minutes: 1,
       timerId: 0, 
     })
+    this.audio2.play();
     // window.location.reload(); 
     // console.log('Desmontado');
   }
