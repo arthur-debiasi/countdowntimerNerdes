@@ -4,6 +4,7 @@ import CountdownTimer from './components/CountdownTimer'
 import ringer from './data/rooster.wav'
 // import music from './data/CTT-musics.mp3'
 import "./App.css"
+import music from './data/linkin-park-mashups.mp3'
 
 export default class App extends Component {
   state = {
@@ -12,7 +13,7 @@ export default class App extends Component {
     seconds: 59,
     minutes: 1  ,
     timerId: 0,
-    volume: 1
+    volume: 0.5
   }
 
   handleChange = ({target: {name, value}}) => {
@@ -57,13 +58,14 @@ export default class App extends Component {
   }
 
   countdownTimerUnmount = () => {
-    // const { timerId } = this.state;
+    const { volume } = this.state;
     clearInterval(this.timerId);
     this.setState({
       seconds: 59,
       minutes: 1,
       timerId: 0, 
     })
+    this.audio2.volume = volume;
     this.audio2.play();
     // window.location.reload(); 
     // console.log('Desmontado');
@@ -76,17 +78,34 @@ export default class App extends Component {
   }
 
   handleVolumeUp = () => {
-    this.setState(({volume}) => ({
-      volume: volume === 1 ? 1 : +(volume + 0.1).toFixed(2)
-    }));
+    this.setState(({volume}) => {
+      const newVolume = volume === 1 ? 1 : +(volume + 0.1).toFixed(2);
+      this.audio.volume = newVolume;
+      this.audio2.volume = newVolume;
+      console.log(this.audio2.src)
+      return {volume: newVolume}
+    });
     console.log('+');
   }
 
   handleVolumeDown = () => {
-    this.setState(({volume}) => ({
-      volume: volume === 0 ? 0 : +(volume - 0.1).toFixed(2)
-    }))
+    this.setState(({volume}) => {
+      const newVolume = volume === 0 ? 0 : +(volume - 0.1).toFixed(2);
+      this.audio.volume = newVolume;
+      this.audio2.volume = newVolume;
+      return {volume: newVolume}
+    })
     console.log('-');
+  }
+
+  handlePlay = () => {
+    const { volume } = this.state;
+    this.audio = new Audio(music);
+    this.audio.volume = volume;
+    this.audio.play();
+  }
+  handleStop = () => {
+    this.audio.pause();
   }
   render() {
     const { isCountdownTimerOn, seconds, minutes, tribo, volume } = this.state;
@@ -113,6 +132,8 @@ export default class App extends Component {
           volume={ volume }
           handleVolumeUp={ this.handleVolumeUp }
           handleVolumeDown={ this.handleVolumeDown }
+          handlePlay={ this.handlePlay }
+          handleStop={ this.handleStop }
         />
         ) : (
         <CountdownSettings

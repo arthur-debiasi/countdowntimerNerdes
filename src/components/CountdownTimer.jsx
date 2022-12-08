@@ -1,16 +1,17 @@
 import React from 'react';
 // import ringer from '../data/boraBill.mp3'
 // import music from '../data/CTT-musics.mp3'
-import music from '../data/linkin-park-mashups.mp3'
+// import music from '../data/linkin-park-mashups.mp3'
 // import './CountdownTimer.css'
 
 class CountdownTimer extends React.Component {
 
   componentDidMount() {
-    const { countdownTimerMount } = this.props;
+    const { countdownTimerMount, handlePlay } = this.props;
     countdownTimerMount()
-    this.audio = new Audio(music);
-    this.audio.play();
+    handlePlay()
+    // this.audio = new Audio(music);
+    // this.audio.play();
   }
 
   componentDidUpdate({seconds}) {
@@ -22,11 +23,12 @@ class CountdownTimer extends React.Component {
   }
 
   componentWillUnmount() {
-    const { countdownTimerUnmount } = this.props;
+    const { countdownTimerUnmount, handleStop } = this.props;
     countdownTimerUnmount();
+    handleStop();
     // this.audio2 = new Audio(ringer);
     // this.audio2.play();
-    this.audio.pause();
+    // this.audio.pause();
   }
 
   render() {
