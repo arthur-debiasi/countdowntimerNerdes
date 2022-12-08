@@ -12,6 +12,7 @@ export default class App extends Component {
     seconds: 59,
     minutes: 1  ,
     timerId: 0,
+    volume: 1
   }
 
   handleChange = ({target: {name, value}}) => {
@@ -73,8 +74,22 @@ export default class App extends Component {
     // const audio = new Audio(ringer);
     // // audio.play();
   }
+
+  handleVolumeUp = () => {
+    this.setState(({volume}) => ({
+      volume: volume === 1 ? 1 : +(volume + 0.1).toFixed(2)
+    }));
+    console.log('+');
+  }
+
+  handleVolumeDown = () => {
+    this.setState(({volume}) => ({
+      volume: volume === 0 ? 0 : +(volume - 0.1).toFixed(2)
+    }))
+    console.log('-');
+  }
   render() {
-    const { isCountdownTimerOn, seconds, minutes, tribo } = this.state;
+    const { isCountdownTimerOn, seconds, minutes, tribo, volume } = this.state;
     return (
       <div className='container'>
         <label htmlFor="tribo-a">
@@ -95,6 +110,9 @@ export default class App extends Component {
           countdownTimerUnmount={ this.countdownTimerUnmount }
           minutes={ minutes }
           seconds={ seconds }
+          volume={ volume }
+          handleVolumeUp={ this.handleVolumeUp }
+          handleVolumeDown={ this.handleVolumeDown }
         />
         ) : (
         <CountdownSettings

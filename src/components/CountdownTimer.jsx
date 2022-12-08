@@ -30,12 +30,24 @@ class CountdownTimer extends React.Component {
   }
 
   render() {
-    const { seconds, minutes } = this.props;
+    const { seconds, minutes, handleVolumeUp, handleVolumeDown } = this.props;
     // console.log('Render');
     // console.log(minutes, seconds);
     return (
       <div className='clock'>
         <h2 className='timer'>{`${minutes} : ${seconds}`}</h2>
+        <button 
+            type='button'
+            onClick={ handleVolumeUp }
+          >
+            +
+          </button>
+          <button 
+            type='button'
+            onClick={ handleVolumeDown }
+          >
+            -
+          </button>
       </div>
     );
   }
