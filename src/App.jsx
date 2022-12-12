@@ -4,7 +4,7 @@ import CountdownTimer from './components/CountdownTimer'
 import ringer from './data/rooster.wav'
 // import music from './data/CTT-musics.mp3'
 import "./App.css"
-import music from './data/linkin-park-mashups.mp3'
+import music from './data/trooper.mp3'
 
 export default class App extends Component {
   state = {
