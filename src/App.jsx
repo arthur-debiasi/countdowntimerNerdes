@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import CountdownSettings from './components/CountdownSettings'
 import CountdownTimer from './components/CountdownTimer'
-import ringer from './data/hj-sim.mp3'
-// import ringer from './data/rooster.wav'
+// import ringer from './data/hj-sim.mp3'
+import ringer from './data/rooster.wav'
 // import music from './data/CTT-musics.mp3'
 import "./App.css"
-import music from './data/trooper.mp3'
+// import music from './data/trooper.mp3'
+import music from './data/pink-floyd-mashups.mp3';
+
 
 export default class App extends Component {
   state = {
