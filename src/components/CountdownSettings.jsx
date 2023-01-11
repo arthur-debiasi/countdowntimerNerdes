@@ -7,7 +7,7 @@ export default class CountdownSettings extends Component {
     
     return (
       <div>
-        { tribo ? <h4>Quantos minutinhos de intervalo, Mariotto?</h4> : <h4>Quantos minutinhos de intervalo, Tedesco?</h4> }
+        { tribo ? <h4>Quantos MINUTINHOS de intervalo, Mariotto?</h4> : <h4>Quantos MINUTINHOS de intervalo, Tedesco?</h4> }
           {' '}
           <input 
             type="number" 
